@@ -9,7 +9,7 @@ import static frc.robot.Constants.Chassis.*;
 import static com.revrobotics.CANSparkMax.IdleMode.*;
 
 import com.revrobotics.SparkMaxRelativeEncoder;
-import com.revrobotics.CANSparkMax; 
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder; 
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.*;
 
@@ -25,7 +25,7 @@ public class Drivetrain extends SubsystemBase {
   private final CANSparkMax leftFront;  // Left side front SparkMAX controller
   private final CANSparkMax rightFront; // Left side rear SparkMAX controller
   private final CANSparkMax leftRear;   // Right side front SparkMAX controller
-  private final CANSparkMax rightRear;  // Right side rearSparkMAX controller
+  private final CANSparkMax rightRear;  // Right side rear SparkMAX controller
   
   private final MecanumDrive driveMecanum; // MecanumDrive object, use this for driving
   /* MecanumDrive odometry object, use for estimating robot position on the field */
