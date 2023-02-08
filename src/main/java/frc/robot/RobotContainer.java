@@ -80,14 +80,10 @@ public class RobotContainer {
         "Initialize Intake",
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
-    new JoystickButton(m_liftController, Button.kX.value)
-        .whenPressed(new InstantCommand(m_shooter::toggleMotors, m_shooter));
     new JoystickButton(m_liftController, Button.kY.value)
         .whenHeld(new RunCommand(m_lift::goUp, m_lift));
     new JoystickButton(m_liftController, Button.kA.value)
         .whenHeld(new RunCommand(m_lift::goDown, m_lift));
-    new JoystickButton(m_driveController, Button.kRightBumper.value)
-        .whenHeld(new RunCommand(m_intake::runIntake, m_intake));
     new JoystickButton(m_driveController, Button.kLeftBumper.value)
         .whenPressed(new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain))
         .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
