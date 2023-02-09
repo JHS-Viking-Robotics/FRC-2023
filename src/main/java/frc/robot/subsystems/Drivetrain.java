@@ -28,9 +28,6 @@ public class Drivetrain extends SubsystemBase {
   private final CANSparkMax rightRear;  // Right side rear SparkMAX controller
   
   private final MecanumDrive driveMecanum; // MecanumDrive object, use this for driving
-  /* MecanumDrive odometry object, use for estimating robot position on the field */
-  private final MecanumDriveOdometry driveOdometry;
-  private final ADXRS450_Gyro driveGyro;   // Gyroscope on the RoboRIO
   
   private final RelativeEncoder leftFrontEncoder;  // Left side front encoder 
   private final RelativeEncoder leftRearEncoder;   // Left side rear encoder 
@@ -74,10 +71,8 @@ public class Drivetrain extends SubsystemBase {
     // Configure MecanumDrive object and set up the gyroscope, also set up the odometry
     driveMecanum = new MecanumDrive(leftFront, leftRear, rightFront, rightRear);
     setMaxSpeed(MAX_SPEED);
-    driveGyro = new ADXRS450_Gyro();
-    driveGyro.reset();
-    driveOdometry = new MecanumDriveOdometry(KINEMATICS, getGyroRotation());
   }
+
 
   /** Drives the robot using ArcadeDrive style control */
   public void arcadeDrive(double throttle, double rotation) {
@@ -94,7 +89,7 @@ public class Drivetrain extends SubsystemBase {
    */ 
   public void drive(double throttle, double slide, double rotation, boolean useFOD) { 
     if (useFOD) {
-      driveMecanum.driveCartesian(throttle, slide, rotation, getGyroAngle());
+      driveMecanum.driveCartesian(throttle, slide, rotation);
     } else {
       driveMecanum.driveCartesian(throttle, slide, rotation);
     }
@@ -172,44 +167,5 @@ public class Drivetrain extends SubsystemBase {
         rightFrontEncoder.getVelocity(),
         leftRearEncoder.getVelocity(),
         rightRearEncoder.getVelocity());
-  }
-
-  /** Get the current robot pose as a Pose2d object in meters */
-  public Pose2d getPose() {
-    return driveOdometry.getPoseMeters();
-  }
-  /** Get the current gyroscope angle in degrees from forward [-180, 180] */
-  public double getGyroAngle() {
-    return driveGyro.getRotation2d().getDegrees();
-  }
-
-  /** Get the current gyroscope velocity in degrees/second,
-   * where positive is counter-clockwise */
-  public double getGyroVelocity() {
-    return -driveGyro.getRate();
-  }
-
-  /** Get the current gyroscope rotation as a Rotation2d object */
-  public Rotation2d getGyroRotation() {
-    return driveGyro.getRotation2d();
-  }
-
-  /** Reset the gyroscope to 0 */
-  public void resetGyro() {
-    if (getVelocityLeft() != 0 || getVelocityRight() != 0) {
-     System.out.println("WARNING: Do not try to reset the gyroscope while the robot is moving");
-     return;
-   }
-    driveGyro.reset();
-  }
-  @Override
-  public void periodic() {
-    // Update odometry
-    driveOdometry.update(getGyroRotation(), getWheelSpeeds());
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
   }
 }

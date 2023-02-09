@@ -30,7 +30,7 @@ public class RobotContainer {
   private final XboxController m_liftController = new XboxController(1);
 
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Lift m_lift = new Lift();
+  private final Winch m_Winch = new Winch();
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_autonSelector = new SendableChooser<>();
@@ -63,7 +63,7 @@ public class RobotContainer {
 
     // Set arcade drive as default, and also set lift.stop as a safety
     m_drivetrain.setDefaultCommand(m_mecanumDrive);
-    m_lift.setDefaultCommand(new RunCommand(m_lift::stop, m_lift));
+    m_Winch.setDefaultCommand(new RunCommand(m_Winch::stop, m_Winch));
   }
 
   /**
@@ -81,9 +81,9 @@ public class RobotContainer {
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
     new JoystickButton(m_liftController, Button.kY.value)
-        .whenHeld(new RunCommand(m_lift::goUp, m_lift));
+        .whenHeld(new RunCommand(m_Winch::goUp, m_Winch));
     new JoystickButton(m_liftController, Button.kA.value)
-        .whenHeld(new RunCommand(m_lift::goDown, m_lift));
+        .whenHeld(new RunCommand(m_Winch::goDown, m_Winch));
     new JoystickButton(m_driveController, Button.kLeftBumper.value)
         .whenPressed(new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain))
         .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
