@@ -94,6 +94,12 @@ public final class Constants {
       /** Winch SparkMAX is inverted */
       public final static boolean WINCH_INVERTED = true;
     }
+    public final static class Angler {
+      /** CAN Bus ID of Angler SparkMAX */
+      public final static int ANGLER_ID = 25;
+      /** Angler SparkMAX is inverted */
+      public final static boolean ANGLER_INVERTED = true;
+    }
 }
   
   /** Joystick USB ports */
