@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController m_driveController = new XboxController(0);
-  private final XboxController m_liftController = new XboxController(1);
+  private final XboxController m_armController = new XboxController(1);
 
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Winch m_Winch = new Winch();
@@ -80,12 +80,15 @@ public class RobotContainer {
         "Initialize Intake",
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
-    new JoystickButton(m_liftController, Button.kY.value)
+    new JoystickButton(m_armController, Button.kY.value)
         .whenHeld(new RunCommand(m_Winch::goUp, m_Winch));
-    new JoystickButton(m_liftController, Button.kA.value)
+    new JoystickButton(m_armController, Button.kA.value)
         .whenHeld(new RunCommand(m_Winch::goDown, m_Winch));
     new JoystickButton(m_driveController, Button.kLeftBumper.value)
         .whenPressed(new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain))
+        .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
+    new JoystickButton(m_driveController, Button.kRightBumper.value)
+        .whenPressed(new InstantCommand(m_drivetrain::setSlowSpeed, m_drivetrain))
         .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
   }
 

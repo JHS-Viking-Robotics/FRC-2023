@@ -116,6 +116,9 @@ public class Drivetrain extends SubsystemBase {
   public void setTurboSpeed() {
     driveMecanum.setMaxOutput(1.0);
   }
+  public void setSlowSpeed() {
+    driveMecanum.setMaxOutput(0.2);
+  }
 
   /**
    * Reset the max speed of the drivetrain to the default in Constants.
