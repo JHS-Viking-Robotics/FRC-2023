@@ -81,12 +81,9 @@ public class Drivetrain extends SubsystemBase {
    * @param throttle speed along y axis (forward is positive) [-1.0, 1.0]
    * @param slide speed along x-axis (right is positive) [-1.0, 1.0]
    * @param rotation rotational speed (clockwise is positive) [-1.0, 1.0]
-   * @param useFOD use Field Oriented Driving
    */ 
-  public void drive(double throttle, double slide, double rotation, boolean useFOD) { 
-    if (useFOD) {
-      driveMecanum.driveCartesian(throttle, slide, rotation);
-    } else {
+  public void drive(double throttle, double slide, double rotation) { 
+  {
       driveMecanum.driveCartesian(throttle, slide, rotation);
     }
   }

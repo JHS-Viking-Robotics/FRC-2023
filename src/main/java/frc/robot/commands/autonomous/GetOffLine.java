@@ -30,21 +30,21 @@ public class GetOffLine extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    drive.drive(0, 0, 0, false);
+    drive.drive(0, 0, 0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double throttle = forward ? 1.0 : -1.0;
-    drive.drive(throttle, 0.0, 0.0, false);
+    drive.drive(throttle, 0.0, 0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     // Stop moving and reset drive speed
-    drive.drive(0, 0, 0, false);
+    drive.drive(0, 0, 0);
     drive.setCoast();
     drive.setMaxSpeed();
   }

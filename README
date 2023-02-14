@@ -49,7 +49,6 @@ During testing, each subsystem will manage its own tab on the ```Shuffleboard```
 
 Action | Button | Notes
 :-:|:-:|:-:
-Enable/Disable FOD | Dashboard | Field Oriented Driving (FOD) makes all movements act relative to the field rather than the robot
 Drive Slide | Left Stick | Drives the robot forward/backward/left/right Mecanum style
 Drive Rotation | Right Stick | Rotates the robot clockwise/counter-clockwise
 Toggle Shooter | X Button | Toggles the Shooter motors on/off
