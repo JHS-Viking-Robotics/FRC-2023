@@ -1,15 +1,16 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Grabbyfingers;
 
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.math.MathUtil;
 
 
-public class Grabbyfeet extends Servo{
- public Grabbyfeet(int channel) {
+public class Claw2 extends Servo{
+ public Claw2(int channel) {
         super(channel);
         //TODO Auto-generated constructor stub
     }
+
  double m_speed;
  double m_length;
  double setPos;
@@ -21,8 +22,8 @@ public class Grabbyfeet extends Servo{
  * @param length max length of the servo [mm]
  * @param speed max speed of the servo [mm/second]
  */
- public Grabbyfeet(int channel, int length, int speed) {
- super(channel);
+ public Claw2(int channel, int length, int speed) {
+ super(3);
  setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
  m_length = length;
  m_speed = speed;

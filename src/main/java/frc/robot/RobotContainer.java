@@ -32,6 +32,7 @@ public class RobotContainer {
 
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Winch m_Winch = new Winch();
+  private final Angler m_Angler = new Angler();
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_autonSelector = new SendableChooser<>();
@@ -41,8 +42,9 @@ public class RobotContainer {
           m_drivetrain,
           () -> m_driveController.getLeftY(),
           () -> m_driveController.getLeftX(),
-          () -> m_driveController.getRightX()
-          );
+          () -> m_driveController.getRightX());
+
+
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -58,6 +60,7 @@ public class RobotContainer {
     // Set arcade drive as default, and also set lift.stop as a safety
     m_drivetrain.setDefaultCommand(m_mecanumDrive);
     m_Winch.setDefaultCommand(new RunCommand(m_Winch::stop, m_Winch));
+    m_Angler.setDefaultCommand(new RunCommand(m_Angler::stop, m_Angler));
   }
 
   /**
