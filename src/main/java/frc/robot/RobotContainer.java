@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -57,6 +58,12 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Winch m_Winch = new Winch();
   private final Angler m_Angler = new Angler();
+  int Cspeed;
+  int Fspeed;
+  private final LinearACT m_Foot1= new LinearACT(0, Fspeed);
+  private final LinearACT m_Foot2= new LinearACT(1, Fspeed);
+  private final LinearACT m_Claw1 = new LinearACT(2, Cspeed);
+  private final LinearACT m_Claw2 = new LinearACT(3, Cspeed);
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_autonSelector = new SendableChooser<>();
@@ -83,6 +90,10 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand( m_mecanumDrive);
     m_Winch.setDefaultCommand(new RunCommand(m_Winch::stop, m_Winch));
     m_Angler.setDefaultCommand(new RunCommand(m_Angler::stop, m_Angler));
+    ((Subsystem) m_Claw1).run(m_Claw1::Dontmove);
+    ((Subsystem) m_Claw2).run(m_Claw2::Dontmove);
+    ((Subsystem) m_Foot1).run(m_Foot1::Dontmove);
+    ((Subsystem) m_Foot2).run(m_Foot2::Dontmove);
   }
 
   /**
@@ -108,6 +119,12 @@ public class RobotContainer {
      LBdButton.onFalse(setMaxSpeed);
      RBdButton.onTrue(setSlowSpeed);
      RBdButton.onFalse(setMaxSpeed);
+     RBAButton.whileTrue(((Subsystem) m_Claw1).run(m_Claw1::extend));
+     RBAButton.whileTrue(((Subsystem) m_Claw2).run(m_Claw2::extend));
+     LBAButton.whileTrue(((Subsystem) m_Claw1).run(m_Claw1::retract));
+     LBAButton.whileTrue(((Subsystem) m_Claw2).run(m_Claw2::retract));
+     adButton.whileTrue(((Subsystem) m_Foot1).run(m_Foot1::extend));
+     adButton.whileTrue(((Subsystem) m_Foot2).run(m_Foot2::extend));
   }
 
   /**
