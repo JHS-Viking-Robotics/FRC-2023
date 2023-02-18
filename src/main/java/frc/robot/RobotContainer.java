@@ -58,12 +58,10 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Winch m_Winch = new Winch();
   private final Angler m_Angler = new Angler();
-  int Cspeed;
-  int Fspeed;
-  private final LinearACT m_Foot1= new LinearACT(0, Fspeed);
-  private final LinearACT m_Foot2= new LinearACT(1, Fspeed);
-  private final LinearACT m_Claw1 = new LinearACT(2, Cspeed);
-  private final LinearACT m_Claw2 = new LinearACT(3, Cspeed);
+  private final LinearACT m_Foot1= new LinearACT(0);
+  private final LinearACT m_Foot2= new LinearACT(1);
+  private final LinearACT m_Claw1 = new LinearACT(2);
+  private final LinearACT m_Claw2 = new LinearACT(3);
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_autonSelector = new SendableChooser<>();
