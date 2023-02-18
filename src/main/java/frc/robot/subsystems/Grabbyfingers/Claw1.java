@@ -10,6 +10,7 @@ public class Claw1 extends Servo{
         super(channel);
         //TODO Auto-generated constructor stub
     }
+ 
 
  double m_speed;
  double m_length;
@@ -23,7 +24,7 @@ public class Claw1 extends Servo{
  * @param speed max speed of the servo [mm/second]
  */
  public Claw1(int channel, int length, int speed) {
- super(2);
+ super(channel);
  setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
  m_length = length;
  m_speed = speed;

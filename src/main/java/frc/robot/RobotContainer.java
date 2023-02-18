@@ -7,10 +7,10 @@ package frc.robot;
 import frc.robot.commands.MecanumDrive;
 import frc.robot.commands.autonomous.GetOffLine;
 import frc.robot.subsystems.*;
+import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,7 +28,31 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController m_driveController = new XboxController(0);
+  Trigger ydButton = new JoystickButton(m_driveController, XboxController.Button.kY.value);
+   // Creates a new JoystickButton object for the `Y` button on m_driveController
+  Trigger xdButton = new JoystickButton(m_driveController, XboxController.Button.kX.value);
+   // Creates a new JoystickButton object for the `X` button on m_driveController
+  Trigger adButton = new JoystickButton(m_driveController, XboxController.Button.kA.value);
+   // Creates a new JoystickButton object for the `A` button on m_driveController
+  Trigger bdButton = new JoystickButton(m_driveController, XboxController.Button.kB.value);
+   // Creates a new JoystickButton object for the `B` button on m_driveController
+  Trigger RBdButton = new JoystickButton(m_driveController, XboxController.Button.kRightBumper.value);
+   // Creates a new JoystickButton object for the `right bummper' on m_driveController
+  Trigger LBdButton = new JoystickButton(m_driveController, XboxController.Button.kLeftBumper.value);
+   // Creates a new JoystickButton object for the `left bummper' on m_driveController
   private final XboxController m_armController = new XboxController(1);
+ Trigger yAButton = new JoystickButton(m_armController, XboxController.Button.kY.value);
+  // Creates a new JoystickButton object for the `Y` button on m_armController
+ Trigger xAButton = new JoystickButton(m_armController, XboxController.Button.kX.value);
+  // Creates a new JoystickButton object for the `X` button on m_armController
+ Trigger aAButton = new JoystickButton(m_armController, XboxController.Button.kA.value);
+  // Creates a new JoystickButton object for the `A` button on m_armController
+ Trigger bAButton = new JoystickButton(m_armController, XboxController.Button.kB.value);
+  // Creates a new JoystickButton object for the `B` button on m_armController
+ Trigger RBAButton = new JoystickButton(m_armController, XboxController.Button.kRightBumper.value);
+  // Creates a new JoystickButton object for the `right bummper' on m_armController
+ Trigger LBAButton = new JoystickButton(m_armController, XboxController.Button.kLeftBumper.value);
+  // Creates a new JoystickButton object for the `left bummper' on m_armController
 
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Winch m_Winch = new Winch();
@@ -42,10 +66,8 @@ public class RobotContainer {
           m_drivetrain,
           () -> m_driveController.getLeftY(),
           () -> m_driveController.getLeftX(),
-          () -> m_driveController.getRightX());
-
-
-  
+          () -> m_driveController.getRightX()
+          );
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,7 +80,7 @@ public class RobotContainer {
         new GetOffLine(m_drivetrain, 0.2, true));
 
     // Set arcade drive as default, and also set lift.stop as a safety
-    m_drivetrain.setDefaultCommand(m_mecanumDrive);
+    m_drivetrain.setDefaultCommand( m_mecanumDrive);
     m_Winch.setDefaultCommand(new RunCommand(m_Winch::stop, m_Winch));
     m_Angler.setDefaultCommand(new RunCommand(m_Angler::stop, m_Angler));
   }
@@ -74,16 +96,18 @@ public class RobotContainer {
         "Initialize Intake",
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
-    new JoystickButton(m_armController, Button.kY.value)
-        .whenHeld(new RunCommand(m_Winch::goUp, m_Winch));
-    new JoystickButton(m_armController, Button.kA.value)
-        .whenHeld(new RunCommand(m_Winch::goDown, m_Winch));
-    new JoystickButton(m_driveController, Button.kLeftBumper.value)
-        .whenPressed(new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain))
-        .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
-    new JoystickButton(m_driveController, Button.kRightBumper.value)
-        .whenPressed(new InstantCommand(m_drivetrain::setSlowSpeed, m_drivetrain))
-        .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
+
+     Command goUp = new RunCommand(m_Winch::goUp, m_Winch);
+     Command goDown = new RunCommand(m_Winch::goDown, m_Winch);
+     Command setTurboSpeed = new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain);
+     Command setSlowSpeed = new InstantCommand(m_drivetrain::setSlowSpeed, m_drivetrain);
+     Command setMaxSpeed = new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain);
+     yAButton.whileTrue(goUp);
+     aAButton.whileTrue(goDown);
+     LBdButton.onTrue(setTurboSpeed);
+     LBdButton.onFalse(setMaxSpeed);
+     RBdButton.onTrue(setSlowSpeed);
+     RBdButton.onFalse(setMaxSpeed);
   }
 
   /**
