@@ -7,7 +7,7 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-public class GetOffLine extends CommandBase {
+public class Charge extends CommandBase {
 
   private final Drivetrain drive; // Drivetrain subsystem to use
   private final boolean forward;  // Whether we are moving forward/backwards off line
@@ -19,7 +19,7 @@ public class GetOffLine extends CommandBase {
    * @param speed speed to move at (0.0, 1.0]
    * @param forward whether to go forward or backwards off the line
   */
-  public GetOffLine(Drivetrain driveSubsystem, double speed, boolean forward) {
+  public Charge(Drivetrain driveSubsystem, double speed, boolean forward) {
     this.drive = driveSubsystem;
     this.forward = forward;
     drive.setMaxSpeed(speed);
@@ -52,8 +52,8 @@ public class GetOffLine extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // should try to get out of the spawning area in either direction, plus some wiggle room 
-  //for april tags 1 and 8, but it will work for other spawn areas just will go over the charge station or be overkill 
-    return forward ? drive.getDistanceLeft() > 5.6 : drive.getDistanceLeft() < -5.6;
+    // should try to geton the middel of a Charge station in either direction, plus some wiggle room 
+    //for april tags 2 and 7 
+    return forward ? drive.getDistanceLeft() > 2.457 : drive.getDistanceLeft() < -2.457;
   }
 }

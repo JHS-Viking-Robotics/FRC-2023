@@ -6,8 +6,8 @@ package frc.robot;
 
 import frc.robot.commands.MecanumDrive;
 import frc.robot.commands.autonomous.GetOffLine;
+import frc.robot.commands.autonomous.Charge;
 import frc.robot.subsystems.*;
-import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -83,6 +83,9 @@ public class RobotContainer {
     m_autonSelector.setDefaultOption(
         "Get Off The Line",
         new GetOffLine(m_drivetrain, 0.2, true));
+    m_autonSelector.addOption(
+        "Charge",
+        new Charge(m_drivetrain, 0.2, true));
 
     // Set arcade drive as default, and also set lift.stop as a safety
     m_drivetrain.setDefaultCommand( m_mecanumDrive);
