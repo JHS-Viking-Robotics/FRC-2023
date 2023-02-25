@@ -6,7 +6,6 @@ public class LinearACT extends Servo{
  public static final String Dontmove = null;
 public LinearACT(int channel) {
         super(channel);
-        //TODO Auto-generated constructor stub
     }
  
 
