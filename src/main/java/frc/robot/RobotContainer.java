@@ -53,7 +53,6 @@ public class RobotContainer {
  Trigger LBAButton = new JoystickButton(m_armController, XboxController.Button.kLeftBumper.value);
   // Creates a new JoystickButton object for the `left bummper' on m_armController
 
-
   private final Drivetrain m_drivetrain = new Drivetrain();
   public static LinearACT m_linearACT = new LinearACT();
   private final Winch m_Winch = new Winch();
@@ -74,6 +73,9 @@ public class RobotContainer {
   }
   public boolean getLBAButton(){
     return m_armController.getLeftBumper();
+  }
+  public boolean getLTrigger(){
+    return m_armController.get()
   }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

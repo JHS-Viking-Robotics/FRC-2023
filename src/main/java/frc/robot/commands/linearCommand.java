@@ -12,6 +12,7 @@ import frc.robot.RobotContainer;
 public class linearCommand extends CommandBase {
   /** Creates a new linearCommand. */
   double position;
+  double stance;
 
   public linearCommand() {
     addRequirements(RobotContainer.m_linearACT);
@@ -22,19 +23,21 @@ public class linearCommand extends CommandBase {
   @Override
   public void initialize() {
     position = 1;
+    stance = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Position", position);    if (Robot.m_robotContainer.getRBAButton()){
-      position -= 0.0001;
+    SmartDashboard.putNumber("Position", position);   
+     if (Robot.m_robotContainer.getRBAButton()){
+      position -= 0.005;
       if (position<0){
         position = 0;
       }
     }
     if (Robot.m_robotContainer.getLBAButton()){
-      position += 0.0001;
+      position += 0.005;
       if (position>1){
         position = 1;
       }

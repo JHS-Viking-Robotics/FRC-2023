@@ -6,13 +6,14 @@ import frc.robot.commands.linearCommand;
 
 public class LinearACT extends SubsystemBase {
   Servo Claw = new Servo(0);
-
-  public LinearACT() {
-
-  }
+  Servo Feet = new Servo (1);
+  public LinearACT() {}
 
   public void setPos(double position) {
     Claw.set(position);
+  }
+  public void setStance(double position) {
+    Feet.set(position);
   }
 
   @Override
