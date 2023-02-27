@@ -100,8 +100,8 @@ public class RobotContainer {
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
 
-     Command goUp = new RunCommand(m_Winch::goUp, m_Winch);
-     Command goDown = new RunCommand(m_Winch::goDown, m_Winch);
+     Command goUp = new RunCommand(m_Angler::goUp, m_Angler);
+     Command goDown = new RunCommand(m_Angler::goDown, m_Angler);
      Command setTurboSpeed = new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain);
      Command setSlowSpeed = new InstantCommand(m_drivetrain::setSlowSpeed, m_drivetrain);
      Command setMaxSpeed = new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain);
