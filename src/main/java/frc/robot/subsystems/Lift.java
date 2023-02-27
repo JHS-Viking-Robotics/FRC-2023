@@ -25,7 +25,7 @@ public class Lift extends SubsystemBase {
     // throughout the match. Using brake mode to counter this
     lift.setIdleMode(kBrake);
   }
-
+  
   /** Raise the Lift */
   public void goUp() {
     lift.set(0.5);

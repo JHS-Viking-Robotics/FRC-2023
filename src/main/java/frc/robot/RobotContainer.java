@@ -4,12 +4,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.MecanumDrive;
-import frc.robot.commands.FireBall;
-import frc.robot.commands.autonomous.GetOffLine;
-import frc.robot.commands.autonomous.ShootAndScoot;
-import frc.robot.subsystems.*;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -19,6 +13,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.MecanumDrive;
+import frc.robot.commands.autonomous.GetOffLine;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.Grabber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,12 +28,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final XboxController m_driveController = new XboxController(0);
-  private final XboxController m_liftController = new XboxController(1);
+  private final XboxController m_grabberController = new XboxController(1);
 
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Shooter m_shooter = new Shooter();
   private final Lift m_lift = new Lift();
-  private final Intake m_intake= new Intake();
+  private final Grabber m_grabber = new Grabber();
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_autonSelector = new SendableChooser<>();
@@ -53,9 +51,6 @@ public class RobotContainer {
           () -> m_driveController.getLeftX(),
           () -> m_driveController.getRightX(),
           true);
-  private final FireBall m_fireBall
-      = new FireBall(
-        m_shooter);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -64,13 +59,6 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Configure the autonomous mode selector
-    m_autonSelector.setDefaultOption(
-        "Shoot And Scoot",
-        new ShootAndScoot(
-            m_drivetrain,
-            m_shooter,
-            0.2,
-            true));
     m_autonSelector.addOption(
         "Get Off The Line",
         new GetOffLine(m_drivetrain, 0.2, true));
@@ -78,7 +66,6 @@ public class RobotContainer {
     // Set arcade drive as default, and also set lift.stop as a safety
     m_drivetrain.setDefaultCommand(m_mecanumDrive);
     m_lift.setDefaultCommand(new RunCommand(m_lift::stop, m_lift));
-    m_intake.setDefaultCommand(new RunCommand(m_intake::stop, m_intake));
   }
 
   /**
@@ -95,22 +82,13 @@ public class RobotContainer {
         "Initialize Intake",
         new InstantCommand(m_intake::toggleDrop, m_intake));
     */
-    new JoystickButton(m_liftController, Button.kX.value)
-        .whenPressed(new InstantCommand(m_shooter::toggleMotors, m_shooter));
-    new JoystickButton(m_liftController, Button.kB.value)
-        .whenPressed(m_fireBall);
-    new JoystickButton(m_liftController, Button.kY.value)
-        .whenHeld(new RunCommand(m_lift::goUp, m_lift));
-    new JoystickButton(m_liftController, Button.kA.value)
-        .whenHeld(new RunCommand(m_lift::goDown, m_lift));
+    new JoystickButton(m_grabberController, Button.kX.value)
+        .whenPressed(new RunCommand(m_grabber::squeeze, m_grabber));
+    new JoystickButton(m_grabberController, Button.kX.value)
+        .whenReleased(new RunCommand(m_grabber::release, m_grabber));
 
-    new JoystickButton(m_driveController, Button.kY.value)
-        .whenPressed(new InstantCommand(m_intake::toggleDrop, m_intake));
-    new JoystickButton(m_driveController, Button.kRightBumper.value)
-        .whenHeld(new RunCommand(m_intake::runIntake, m_intake));
-    new JoystickButton(m_driveController, Button.kLeftBumper.value)
-        .whenPressed(new InstantCommand(m_drivetrain::setTurboSpeed, m_drivetrain))
-        .whenReleased(new InstantCommand(m_drivetrain::setMaxSpeed, m_drivetrain));
+        new JoystickButton(m_grabberController, Button.kRightBumper.value)
+        .whileTrue(new squeeze(m_grabber));
   }
 
   /**

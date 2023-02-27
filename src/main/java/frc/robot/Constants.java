@@ -28,35 +28,6 @@ public final class Constants {
 
   /** Configuration options, PID constants, and CAN Bus ID's for various subsystems */
   public final static class Subsystem {
-    /** Configuration options, PID constants, and CAN Bus ID's for {@link frc.robot.subsystems.Intake Intake} subsystem */
-    public final static class Intake {
-      /** CAN Bus ID of Intake SparkMAX */
-      public final static int TAKE_ID = 22;
-      /** Intake SparkMAX is inverted */
-      public final static boolean TAKE_INVERTED = false;
-      /** ID for pneumatic channel for dropping intake*/
-      public final static int INTAKE_DROP_ID = 4;
-      /** Max speed of the robot between [0,1] */
-      public final static double TAKE_SPEED = .75;
-    }
-
-    /** Configuration options, PID constants, and CAN Bus ID's for {@link frc.robot.subsystems.Shooter Shooter} subsystem */
-    public final static class Shooter {
-      /** CAN Bus ID of front SparkMAX */
-      public final static int FRONT_ID = 32;
-      /** CAN Bus ID of rear SparkMAX */
-      public final static int REAR_ID = 33;
-      /** Forward channel on the Pneumatics Module */
-      public final static int TRIGGER_FORWARD_ID = 1;
-      /** Reverse channel on the Pneumatics Module */
-      public final static int TRIGGER_REVERSE_ID = 2;
-      /** Firing speed of the motors [0.0, 1.0] */
-      public final static double SHOOTER_SPEED = 1.0;
-      /** Front SparkMAX is inverted */
-      public final static boolean FRONT_INVERTED = true;
-      /** Rear SparkMAX is inverted */
-      public final static boolean REAR_INVERTED = false;
-    }
 
     /** Configuration options, PID constants, and CAN Bus ID's for {@link frc.robot.subsystems.Drivetrain Drivetrain} subsystem */
     public final static class Drivetrain {
@@ -123,6 +94,10 @@ public final class Constants {
       public final static int LIFT_ID = 24;
       /** Lift SparkMAX is inverted */
       public final static boolean LIFT_INVERTED = true;
+    }
+
+    public final static class Grabber {
+     
     }
 }
   
