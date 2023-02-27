@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -26,14 +27,14 @@ public class linearCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Robot.m_robotContainer.getRBAButton()){
-      position -= 0.001;
+    SmartDashboard.putNumber("Position", position);    if (Robot.m_robotContainer.getRBAButton()){
+      position -= 0.0001;
       if (position<0){
         position = 0;
       }
     }
     if (Robot.m_robotContainer.getLBAButton()){
-      position += 0.001;
+      position += 0.0001;
       if (position>1){
         position = 1;
       }

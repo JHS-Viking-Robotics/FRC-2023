@@ -24,12 +24,12 @@ public class Angler extends SubsystemBase {
   
   /** Raise the Arm */
   public void goUp1() {
-    Angler.set(0.5);
+    Angler.set(0.15);
   }
 
   /** Lower the winch */
   public void goDown1() {
-    Angler.set(-0.5);
+    Angler.set(-0.15);
   }
 
   /** Stop the Arm. Note that this will not work after the match when the power
