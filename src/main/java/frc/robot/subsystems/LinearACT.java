@@ -1,39 +1,23 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.linearCommand;
 
-public class LinearACT extends Servo{
- public static final String Dontmove = null;
-public LinearACT(int channel) {
-        super(channel);
-    }
- 
+public class LinearACT extends SubsystemBase {
+  Servo Claw = new Servo(0);
 
- int m_speed;
- int m_length;
- int setPos;
- int curPos;
- /**
- * Parameters for L16-R Actuonix Linear Actuators
- *
- * @param channel PWM channel used to control the servo
- * @param speed max speed of the servo [mm/second]
- */
- public LinearACT(int channel, int speed) {
- super(channel);
- setBounds(2.0, 1.8, 1.5, 1.2, 1.0);
- m_speed = speed;
- }
- //extends linear actuator
- public void extend() {
-    m_speed= 32;
+  public LinearACT() {
+
   }
-  //retracts linear actuator
-  public void retract() {
-    m_speed= -32;
+
+  public void setPos(double position) {
+    Claw.set(position);
   }
-  //stops linear actuator from moving
-  public void Dontmove() {
-    m_speed= 0;
+
+  @Override
+  public void periodic() {
+    setDefaultCommand(new linearCommand());
   }
+
 }

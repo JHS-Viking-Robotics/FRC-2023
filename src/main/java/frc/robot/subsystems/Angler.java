@@ -23,12 +23,12 @@ public class Angler extends SubsystemBase {
   }
   
   /** Raise the Arm */
-  public void goUp() {
+  public void goUp1() {
     Angler.set(0.5);
   }
 
   /** Lower the winch */
-  public void goDown() {
+  public void goDown1() {
     Angler.set(-0.5);
   }
 
