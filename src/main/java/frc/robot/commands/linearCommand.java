@@ -31,13 +31,13 @@ public class linearCommand extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("Position", position);   
     if (Robot.m_robotContainer.getRBAButton()){
-      position -= 0.005;
+      position -= 0.01;
       if (position<0){
         position = 0;
       }
     }
     if (Robot.m_robotContainer.getLBAButton()){
-      position += 0.005;
+      position += 0.01;
       if (position>1){
         position = 1;
       }

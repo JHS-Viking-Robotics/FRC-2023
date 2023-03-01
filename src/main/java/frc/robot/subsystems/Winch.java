@@ -28,12 +28,12 @@ public class Winch extends SubsystemBase {
 
   /** Raise the winch */
   public void goUp() {
-    winch.set(0.5);
+    winch.set(0.15);
   }
 
   /** Lower the winch */
   public void goDown() {
-    winch.set(-0.5);
+    winch.set(-0.15);
   }
 
   /** Stop the Winch. Note that this will not work after the match when the power
