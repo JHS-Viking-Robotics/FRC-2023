@@ -74,8 +74,11 @@ public class RobotContainer {
   public boolean getLBAButton(){
     return m_armController.getLeftBumper();
   }
-  public boolean getLTrigger(){
-    return m_armController.get()
+  public boolean getRATrigger(){
+    return m_armController.getRightTriggerAxis()>0.05;
+  }
+  public boolean getLATrigger(){
+    return m_armController.getLeftTriggerAxis()>0.05;
   }
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

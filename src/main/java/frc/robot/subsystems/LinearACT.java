@@ -12,8 +12,8 @@ public class LinearACT extends SubsystemBase {
   public void setPos(double position) {
     Claw.set(position);
   }
-  public void setStance(double position) {
-    Feet.set(position);
+  public void setStance(double stance) {
+    Feet.set(stance);
   }
 
   @Override

@@ -30,7 +30,7 @@ public class linearCommand extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putNumber("Position", position);   
-     if (Robot.m_robotContainer.getRBAButton()){
+    if (Robot.m_robotContainer.getRBAButton()){
       position -= 0.005;
       if (position<0){
         position = 0;
@@ -42,8 +42,21 @@ public class linearCommand extends CommandBase {
         position = 1;
       }
     }
+    if (Robot.m_robotContainer.getRATrigger()){
+      stance -= 0.005;
+      if (stance<0){
+        stance = 0;
+      }
+    }
+    if (Robot.m_robotContainer.getLATrigger()){
+      stance += 0.005;
+      if (stance>1){
+        stance = 1;
+      }
+    }
 
     RobotContainer.m_linearACT.setPos(position);
+    RobotContainer.m_linearACT.setStance(stance);
   }
 
   // Called once the command ends or is interrupted.
