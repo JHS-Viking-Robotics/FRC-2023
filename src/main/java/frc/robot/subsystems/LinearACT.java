@@ -3,10 +3,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.linearCommand;
+import static frc.robot.Constants.Subsystem.LinearACT.*;
 
 public class LinearACT extends SubsystemBase {
-  Servo Claw = new Servo(0);
-  Servo Feet = new Servo (1);
+  Servo Claw = new Servo(ChannelC);
+  Servo Feet = new Servo (ChannelF);
   public LinearACT() {}
 
   public void setPos(double position) {

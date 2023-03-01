@@ -100,6 +100,12 @@ public final class Constants {
       /** Angler SparkMAX is inverted */
       public final static boolean ANGLER_INVERTED = true;
     }
+    public final static class LinearACT {
+      /** PWM Value for Claws*/
+      public final static int ChannelC = 0;
+      /** PWM Value for Feet*/
+      public final static int ChannelF = 1;
+    }
 }
   
   /** Joystick USB ports */
