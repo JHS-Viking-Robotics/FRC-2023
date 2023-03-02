@@ -22,7 +22,7 @@ public class linearCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    position = 1;
+    position = 0;
    /** stance = 0;*/
   }
 
