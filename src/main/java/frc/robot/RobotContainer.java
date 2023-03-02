@@ -66,11 +66,11 @@ public class RobotContainer {
           () -> m_driveController.getLeftX(),
           () -> m_driveController.getRightX()
           );
-  public boolean getRBAButton(){
-    return m_armController.getRightBumper();
+  public boolean getXDButton(){
+    return m_driveController.getXButton();
   }
-  public boolean getLBAButton(){
-    return m_armController.getLeftBumper();
+  public boolean getBDButton(){
+    return m_driveController.getBButton();
   }
  /** public boolean getRATrigger(){
     return m_armController.getRightTriggerAxis()>0.05;
