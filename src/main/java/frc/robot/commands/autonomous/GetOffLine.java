@@ -54,6 +54,6 @@ public class GetOffLine extends CommandBase {
   public boolean isFinished() {
     // should try to get out of the spawning area in either direction, plus some wiggle room 
   //for april tags 1 and 8, but it will work for other spawn areas just will go over the charge station or be overkill 
-    return forward ? drive.getDistanceLeft() > 4.5 : drive.getDistanceLeft() < -4.5;
+    return forward ? drive.getDistanceLeft() > 3 : drive.getDistanceLeft() < -3;
   }
 }
